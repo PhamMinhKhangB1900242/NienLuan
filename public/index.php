@@ -26,6 +26,9 @@ require_once ('data/dbhelper.php');
   <li class="nav-item">
     <a class="nav-link" href="indexproduct.php">Quản Lý Sản Phẩm</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="logout.php">Đăng Xuất</a>
+  </li>
 </ul>
 <body>
 	<div class="container">

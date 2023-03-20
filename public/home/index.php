@@ -20,6 +20,12 @@ require_once ('../data/dbhelper.php');
 </head>
 
 <body>
+<ul class="nav nav-tabs">
+ 
+  <li class="nav-item">
+    <a class="nav-link" href="../login.php">Đăng nhập</a>
+  </li>
+</ul>
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
