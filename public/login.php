@@ -1,4 +1,3 @@
-
 <?php
 
 $loggedin = false;
@@ -6,23 +5,21 @@ $error = false;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-	if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
-		if ( (strtolower($_POST['email']) == 'admin@admin') && ($_POST['password'] == 'admin') ) {
-			$_SESSION['user'] = 'admin';
-			$loggedin = true;
-		} else {
-			$error = 'Địa chỉ email và mật khẩu không khớp!';
-		}
-
-	} else {
-		$error = 'Hãy đảm bảo rằng bạn cung cấp đầy đủ địa chỉ email và mật khẩu!';
-	}
-
+        if ((strtolower($_POST['email']) == 'admin@admin') && ($_POST['password'] == 'admin')) {
+            $_SESSION['user'] = 'admin';
+            $loggedin = true;
+        } else {
+            $error = 'Địa chỉ email và mật khẩu không khớp!';
+        }
+    } else {
+        $error = 'Hãy đảm bảo rằng bạn cung cấp đầy đủ địa chỉ email và mật khẩu!';
+    }
 }
 
 if ($error) {
-	echo '<p class="error">' . $error . '</p>';
+    echo '<p class="error">' . $error . '</p>';
 }
 
 
@@ -31,6 +28,7 @@ if ($error) {
 ?>
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,15 +43,14 @@ if ($error) {
     <script src="../../js/script.js"></script>
     <title>Đăng nhập </title>
 </head>
-        </div>
-    </nav>
-	<?php
-	if ($loggedin) {
-	echo '<p>You are now logged in!</p>';
-	header('Location: index.php');
-
+</div>
+</nav>
+<?php
+if ($loggedin) {
+    echo '<p>You are now logged in!</p>';
+    header('Location: index.php');
 } else {
-	echo'
+    echo '
 	<form name="frmdangnhap" id="frmdangnhap" method="post" action="login.php">
             <div class="container mt-4">
                 <div class="row justify-content-center">
@@ -83,7 +80,7 @@ if ($error) {
                                         <div class="col-6">
                                             <button name="submit"  type="submit" class="btn btn-primary px-4" name="btnDangNhap">Đăng nhập</button>
                                         </div>
-                                       
+
 
 
                                     </div>
@@ -96,6 +93,5 @@ if ($error) {
                 </div>
             </div>
         </form>';
-	
 }
 ?>

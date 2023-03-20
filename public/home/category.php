@@ -43,7 +43,7 @@ if(isset($_GET['id'])) {
             $productList = excuteResult($sql);
 
             foreach ($productList as $item){
-                echo ' <div class="col-lg-3">
+                echo ' <div class="col-lg-4">
                <a href="detail.php?id='.$item['id'].'"> <img src="'.$item['thumbnail'].'" style= "width: 100%"></a>
                <a href="detail.php?id='.$item['id'].'"> <p>'.$item['title'].'</p></a>
                 <p style= "color: red; font-weight: bold;">'.$item['price'].'</p>
