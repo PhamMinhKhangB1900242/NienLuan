@@ -5,6 +5,7 @@ $id = $name = '';
 if (!empty($_POST)) {
 	if (isset($_POST['name'])) {
 		$name = $_POST['name'];
+		$name = str_replace('"','\\"', $name);
 	}
 	if (isset($_POST['id'])) {
 		$id = $_POST['id'];
@@ -41,16 +42,16 @@ if (isset($_GET['id'])) {
 <html>
 <head>
 	<title>Thêm/Sửa Danh Mục</title>
-	<!-- Latest compiled and minified CSS -->
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-	<!-- jQuery library -->
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-	<!-- Popper JS -->
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-	<!-- Latest compiled JavaScript -->
+
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <ul class="nav nav-tabs">

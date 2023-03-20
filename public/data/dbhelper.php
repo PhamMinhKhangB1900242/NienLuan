@@ -15,13 +15,13 @@ function excuteResult($sql){
     mysqli_close($con);
     return $data;
 }
-function excuteSingleResult($sql){
-    $con = mysqli_connect(HOST,USERNAME,PASSWORD,DATABASE);
-    $result = mysqli_query($con, $sql);
-    $row =mysqli_fetch_array($result, 1);
-    mysqli_close($con);
-    return $row;
-}
+// function excuteSingleResult($sql){
+//     $con = mysqli_connect(HOST,USERNAME,PASSWORD,DATABASE);
+//     $result = mysqli_query($con, $sql);
+//     $row =mysqli_fetch_array($result, 1);
+//     mysqli_close($con);
+//     return $row;
+// }
 function executeSingleResult($sql) {
 	//save data into table
 	// open connection to database
@@ -36,9 +36,9 @@ function executeSingleResult($sql) {
 	return $row;
 }
 
-function excuteShop($query){
-    $con = mysqli_connect(HOST,USERNAME,PASSWORD,DATABASE);
-    $result = mysqli_query($con, $query);
-    $row =mysqli_fetch_array($result);
-    return $row;
-}
+// function excuteShop($query){
+//     $con = mysqli_connect(HOST,USERNAME,PASSWORD,DATABASE);
+//     $result = mysqli_query($con, $query);
+//     $row =mysqli_fetch_array($result);
+//     return $row;
+// }
