@@ -31,6 +31,9 @@ if (isset($_GET['id'])) {
   </li>
   <li class="nav-item">
     <a class="nav-link" href="index.php">Danh Mục</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../home/cart.php">Giỏ Hàng</a>
   </li>	
  
   <li class="nav-item">
@@ -49,8 +52,8 @@ if (isset($_GET['id'])) {
 				<?php
 
 				$sql = 'select product.id, product.title, product.price, product.thumbnail,product.updated_at, 
-category.name category_name 
-from product left join category on product.id_category = category.id';
+				category.name category_name 
+				from product left join category on product.id_category = category.id';
 				$Listproduct = excuteResult($sql);
 				$query = "SELECT * FROM sanpham";
 		
@@ -59,11 +62,15 @@ from product left join category on product.id_category = category.id';
 					echo ' 
 						
 						<div class="col-lg-3">
-							<form method="post" id=' . $item['id'] . '> 
-							<a href="detail.php?id='.$item['id'].'"> <img src="'.$item['thumbnail'].'" style= "width: 100%"></a>
+							<form method="post" id=' . $item['id'] . ' action="cart.php?action=addcart&id='.$item['id'].'">
+							<div> 
+								<a href="detail.php?id='.$item['id'].'"> <img src="'.$item['thumbnail'].'" style= "width: 100%"></a>
 								<a href="detail.php?id='.$item['id'].'"> <p>'.$item['title'].'</p></a>
                 				<p style= "color: red; font-weight: bold;">' . $item['price'] . '</p>
-							</form>
+								<input type="text" class="form-control" name="quantity" value="1">
+								<input type="submit" name="addcart"  class="u-full-width button-primary button" value="Thêm vào giỏ hàng"></input>
+								</div>
+								</form>
                 		 </div>';
 						
 				}

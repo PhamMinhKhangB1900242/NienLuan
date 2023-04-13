@@ -11,7 +11,7 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 	<link rel="stylesheet" media="all" href="css/style.css">
 	<title><?php
 	if (defined('TITLE')) {
-		echo TITLE;
+		echo 'TITLE';
 	} else {
 		echo 'Trang các Trích dẫn';
 	}

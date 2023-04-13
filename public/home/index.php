@@ -26,7 +26,10 @@ require_once ('../data/dbhelper.php');
   </li>
   <li class="nav-item">
     <a class="nav-link" href="index.php">Danh Mục</a>
-  </li>	
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../home/cart.php">Giỏ Hàng</a>
+  </li>		
  
   <li class="nav-item">
     <a class="nav-link" href="../login.php">Đăng nhập</a>

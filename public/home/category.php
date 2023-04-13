@@ -29,6 +29,21 @@ if(isset($_GET['id'])) {
 </head>
 
 <body>
+<ul class="nav nav-tabs">
+<li class="nav-item">
+    <a class="nav-link" href="home.php">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="index.php">Danh Mục</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../home/cart.php">Giỏ Hàng</a>
+  </li>		
+ 
+  <li class="nav-item">
+    <a class="nav-link" href="../login.php">Đăng nhập</a>
+  </li>
+</ul>
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">

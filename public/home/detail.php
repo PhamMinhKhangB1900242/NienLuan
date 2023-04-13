@@ -33,6 +33,9 @@ if(isset($_GET['id'])) {
   </li>
   <li class="nav-item">
     <a class="nav-link" href="index.php">Danh Mục</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"href="../home/cart.php">Giỏ Hàng</a>
   </li>	
  
   <li class="nav-item">
