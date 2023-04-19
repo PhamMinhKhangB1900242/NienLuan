@@ -8,7 +8,7 @@ require_once('page.php');
 
 <head>
 	<meta charset="UTF-8">
-	<title>Quản Lý San Pham</title>
+	<title>Quản Lý Đơn Hàng</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -39,40 +39,36 @@ require_once('page.php');
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center">Quản Lý San Pham</h2>
+				<h2 class="text-center">Quản Lý Đơn Hàng</h2>
 			</div>
 			<div class="panel-body">
-				<div class="row">
-					<div class="col-lg-6">
-						<a href="addproduct.php"> <button class="btn btn-success" style="margin-bottom: 15px;">Thêm San Pham</button></a>
 
-					</div>
-					<div class="col-lg-6">
-						<form method="POST">
-						
-							<div class="form-group">
-								<input type="text" class="form-control" id="s" name="s" style="margin-top:px;width:200px; float:right;"><button class="btn btn-success" style="margin-left: 287px;margin-bottom: 30px;">Tìm</button>
-								
-							</div>
-					</div>
-				</div>
+            <!-- Toàn văn
+id	
+name	
+phone	
+address	
+total	
+created_at	
+updated_at				 -->
 
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th width="50px">STT</th>
-							<th>Hinh Anh</th>
-							<th>Tên San Pham</th>
-							<th>Gia Ban</th>
-							<th>Danh Muc</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Address</th>
+							<th>total</th>
 							<th>Ngay Cap Nhat</th>
 							<th width="50px"></th>
-							<th width="50px"></th>
+							<th width="110px"></th>
+                            <th width="50px"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-						$limit = 10;
+						$limit = 5;
 						$page = 1;
 						if (isset($_GET['page'])) {
 							$page = $_GET['page'];
@@ -90,34 +86,32 @@ require_once('page.php');
 						if (!empty($s)) {
 							$additional = ' and title like "%' . $s . '%"';
 						}
-						$sql = 'select count(id) as total from product ';
+						$sql = 'select count(id) as total from orders ';
 						$countResult = excuteSingleResult($sql);
 						$count = $countResult['total'];
 						$number = ceil($count / $limit);
 						$firstIndex = ($page - 1) * $limit;
-						// SELECT orders.name, orders.address, orders.phone, orders_detail.*, product.title as product_name 
-						// FROM orders
-						// INNER JOIN orders_detail ON orders.id = orders_detail.id_orders
-						// INNER JOIN product ON product.id = orders_detail.id_product
-						// WHERE orders.id = 16
 
-						$sql  = 'select product.id, product.title, product.price, product.thumbnail,product.updated_at, 
-                category.name category_name 
-                from product left join category on product.id_category = category.id where 1' . $additional . ' limit ' . $firstIndex . ', ' . $limit;
-						$productList = excuteResult($sql);
 
-						foreach ($productList as $item) {
+						$sql  = 'select * from orders where 1 ' . $additional . ' limit ' . $firstIndex . ', ' . $limit;
+						$ordersList = excuteResult($sql);
+
+						foreach ($ordersList as $item) {
 							echo '<tr>
 				<td>' . (++$firstIndex) . '</td>
-				<td><img src="' . $item['thumbnail'] . '"
-                style="max-width: 100px"/></td>
-                <td>' . $item['title'] . '</td>
-                <td>' . $item['price'] . '</td>
-                <td>' . $item['category_name'] . '</td>
+				<td>' . $item['name'] . '</td>
+                <td>' . $item['phone'] . '</td>
+                <td>' . $item['address'] . '</td>
+                <td>' . $item['total'] . '</td>
                 <td>' . $item['updated_at'] . '</td>
-				<td>
-			<a  href="addproduct.php?id=' . $item['id'] . '" class="btn btn-warning"> Sửa</a>
-			</td>
+                <td>
+                <button class="btn btn-success" >Duyệt</button>
+                </td>
+                <td>
+                
+                <a  href="orders_detail.php?id=' . $item['id'] . '" class="btn btn-warning"> Chi Tiết</a>
+                
+                </td>
 			<td>
 			<button class="btn btn-danger" onclick="deleteProduct(' . $item['id'] . ')">Xóa</button>
 			</td>
@@ -131,12 +125,12 @@ require_once('page.php');
 	</div>
 	<script type="text/javascript">
 		function deleteProduct(id) {
-			var option = confirm('Bạn có chắc chắn muốn xoá san pham này không?')
+			var option = confirm('Bạn có chắc chắn muốn xoá đơn hàng này không?')
 			if (!option) {
 				return;
 			}
 			console.log(id)
-			$.post('ajaxproduct.php', {
+			$.post('ajaxorders.php', {
 				'id': id,
 				'action': 'delete'
 			}, function(data) {

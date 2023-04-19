@@ -1,8 +1,14 @@
 <?php
 require_once('config.php');
-function execute($sql){
+function execute($sql,$action=''){
+    
     $con = mysqli_connect(HOST,USERNAME,PASSWORD,DATABASE);
     mysqli_query($con, $sql);
+    if($action== "insert"){
+        $last_insert_id = mysqli_insert_id($con);
+        mysqli_close($con);
+        return $last_insert_id;
+    }
     mysqli_close($con);
 }
 function excuteResult($sql){

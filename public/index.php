@@ -30,6 +30,9 @@ session_start();
 		<a class="nav-link" href="indexproduct.php">Quản Lý Sản Phẩm</a>
 	</li>
 	<li class="nav-item">
+		<a class="nav-link" href="indexorders.php">Quản Lý Đơn Hàng</a>
+	</li>
+	<li class="nav-item">
 		<a class="nav-link" href="logout.php">Đăng Xuất</a>
 	</li>
 </ul>

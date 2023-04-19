@@ -1,5 +1,7 @@
 <?php
 
+
+
 require_once('../data/dbhelper.php');
 session_start();
 $id = $name = $phone = $address = $price = '';
@@ -31,8 +33,18 @@ if (!empty($_POST)) {
         if ($id == '') {
             $sql = 'insert into orders(name,phone,address,total, created_at, updated_at) values ("' . $name . '","' . $phone . '", "' . $address . '", "' . $total . '","' . $created_at . '", "' . $updated_at . '")';
         }
-        execute($sql);
-        header('Location: thanhtoan_cart.php');
+        // execute($sql);
+        $id_orders = execute($sql,"insert");
+        // id	quantity	id_product	id_orders	created_at	updated_at
+            // $sql = 'insert into orders_detail( quantity,id_product,id_orders, created_at, updated_at) values ("' . $quantity . '","' . $id_product . '", "' . $id_orders . '","' . $created_at . '", "' . $updated_at . '")';
+            foreach($_SESSION['cart'] as $cartItem)
+            {
+                $quantity = $cartItem['quantity'];
+                $id_product = $cartItem['id'];
+                $sqlInsertOrderDetail = 'insert into orders_detail( quantity,id_product,id_orders, created_at, updated_at) values ("' . $quantity . '","' . $id_product . '", "' . $id_orders . '","' . $created_at . '", "' . $updated_at . '")';
+                execute($sqlInsertOrderDetail);
+            }
+        header('Location: home.php');
         die();
     }
 }
@@ -88,6 +100,13 @@ if (isset($_GET['id']) && isset($_POST['addcart'])) {
 
         $_SESSION['cart'][] = $session_array;
     }
+}
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'clearall') {
+        unset($_SESSION['cart']);
+        echo '<script>window.location="home.php"</script>';
+    }
+  
 }
 
 ?>
@@ -181,6 +200,13 @@ if (isset($_GET['id']) && isset($_POST['addcart'])) {
                                 $ids = array_keys($_SESSION['cart']);
 
                                 // }
+                                if (isset($_GET['action'])) {
+                                    if ($_GET['action'] == 'clearall') {
+                                        unset($_SESSION['cart']);
+                                        echo '<script>window.location="home.php"</script>';
+                                    }
+                                   
+                                }
                             }
 
                             echo '
@@ -191,16 +217,7 @@ if (isset($_GET['id']) && isset($_POST['addcart'])) {
                                 </li>
                               
                                 ';
-                            if (!empty($name)) {
-                                $created_at = $updated_at = date('Y-m-d H:s:i');
-                                //Luu vao database
-                                if ($id == '') {
-                                    $sql = 'insert into orders(name,phone,address,total, created_at, updated_at) values ("' . $name . '","' . $phone . '", "' . $address . '", "' . $total . '","' . $created_at . '", "' . $updated_at . '")';
-                                }
-                                execute($sql);
-                                header('Location: thanhtoan_cart.php');
-                                die();
-                            }
+                               
                             ?>
                         </ul>
 
@@ -223,10 +240,17 @@ if (isset($_GET['id']) && isset($_POST['addcart'])) {
                                     <label for="phone">Điện thoại</label>
                                     <input type="text" size="74" name="phone" id="phone" value="">
                                 </div>
+                                    <input hidden type="text" size="74" name="total" id="total" value=<?php echo $total ?>>
                             </form>
                         </div>
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="dathang">Đặt hàng</button>
+                        <div>
+
+                        <a href="thanhtoan_cart.php?action=clearall">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="dathang">Đặt hàng</button> 
+                    </a>
+                        
+                        </div>
 
                     </div>
                 </div>
@@ -235,7 +259,17 @@ if (isset($_GET['id']) && isset($_POST['addcart'])) {
         </div>
 
     </main>
+    
 </body>
+<?php
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'clearall') {
+        unset($_SESSION['cart']);
+        echo '<script>window.location="home.php"</script>';
+    }
+   
+}
+?>
 <footer id="footer" class="footer">
 	<p> Hân Hạnh Phục Vụ Bạn</p>
 	<a class="top" href="index.html"></a>
