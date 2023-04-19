@@ -37,3 +37,5 @@ function excuteShop($query){
     $row =mysqli_fetch_array($result);
     return $row;
 }
+
+

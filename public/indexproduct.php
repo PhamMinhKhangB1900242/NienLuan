@@ -1,11 +1,13 @@
 <?php
-require_once ('data/dbhelper.php');
+require_once('data/dbhelper.php');
+require_once('page.php');
 ?>
 
 <!DOCTYPE html>
-<html  lang="vi">
+<html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>Quản Lý San Pham</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -20,16 +22,17 @@ require_once ('data/dbhelper.php');
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" href="index.php">Quản Lý Danh Mục</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="indexproduct.php">Quản Lý Sản Phẩm</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="logout.php">Đăng Xuất</a>
-  </li>
+	<li class="nav-item">
+		<a class="nav-link" href="index.php">Quản Lý Danh Mục</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="indexproduct.php">Quản Lý Sản Phẩm</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="logout.php">Đăng Xuất</a>
+	</li>
 </ul>
+
 <body>
 	<div class="container">
 		<div class="panel panel-primary">
@@ -37,55 +40,93 @@ require_once ('data/dbhelper.php');
 				<h2 class="text-center">Quản Lý San Pham</h2>
 			</div>
 			<div class="panel-body">
-           <a href= "addproduct.php">  <button class="btn btn-success" style="margin-bottom: 15px;">Thêm San Pham</button></a>
-            <table class="table table-bordered table-hover">
+				<div class="row">
+					<div class="col-lg-6">
+						<a href="addproduct.php"> <button class="btn btn-success" style="margin-bottom: 15px;">Thêm San Pham</button></a>
+
+					</div>
+					<div class="col-lg-6">
+						<form method="POST">
+						
+							<div class="form-group">
+								<input type="text" class="form-control" id="s" name="s" style="margin-top:px;width:200px; float:right;"><button class="btn btn-success" style="margin-left: 287px;margin-bottom: 30px;">Tìm</button>
+								
+							</div>
+					</div>
+				</div>
+
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th width="50px">STT</th>
-                            <th>Hinh Anh</th>
+							<th>Hinh Anh</th>
 							<th>Tên San Pham</th>
-                            <th>Gia Ban</th>
-                            <th>Danh Muc</th>
-                            <th>Ngay Cap Nhat</th>
+							<th>Gia Ban</th>
+							<th>Danh Muc</th>
+							<th>Ngay Cap Nhat</th>
 							<th width="50px"></th>
 							<th width="50px"></th>
 						</tr>
 					</thead>
-                <tbody> 
-				<?php 
-                $sql          = 'select product.id, product.title, product.price, product.thumbnail,product.updated_at, 
+					<tbody>
+						<?php
+						$limit = 10;
+						$page = 1;
+						if (isset($_GET['page'])) {
+							$page = $_GET['page'];
+						}
+						if ($page <= 0) {
+							$page = 1;
+						}
+						//search
+						$s = '';
+						if (isset($_POST['s'])) {
+							$s = $_POST['s'];
+							$s = str_replace('"', '\"', $s);
+						}
+						$additional = '';
+						if (!empty($s)) {
+							$additional = ' and title like "%' . $s . '%"';
+						}
+						$sql = 'select count(id) as total from product ';
+						$countResult = excuteSingleResult($sql);
+						$count = $countResult['total'];
+						$number = ceil($count / $limit);
+						$firstIndex = ($page - 1) * $limit;
+
+
+						$sql  = 'select product.id, product.title, product.price, product.thumbnail,product.updated_at, 
                 category.name category_name 
-                from product left join category on product.id_category = category.id';
-                $productList = excuteResult($sql);
-                $index = 1;
-            foreach ($productList as $item) {
-	echo '<tr>
-				<td>'.($index++).'</td>
-				<td><img src="'.$item['thumbnail'].'"
+                from product left join category on product.id_category = category.id where 1' . $additional . ' limit ' . $firstIndex . ', ' . $limit;
+						$productList = excuteResult($sql);
+
+						foreach ($productList as $item) {
+							echo '<tr>
+				<td>' . (++$firstIndex) . '</td>
+				<td><img src="' . $item['thumbnail'] . '"
                 style="max-width: 100px"/></td>
-                <td>'.$item['title'].'</td>
-                <td>'.$item['price'].'</td>
-                <td>'.$item['category_name'].'</td>
-                <td>'.$item['updated_at'].'</td>
+                <td>' . $item['title'] . '</td>
+                <td>' . $item['price'] . '</td>
+                <td>' . $item['category_name'] . '</td>
+                <td>' . $item['updated_at'] . '</td>
 				<td>
-                <a href="addproduct.php?id='.$item['id'].'"> <button class="btn btn-warning">Sửa</button></a>
-				
-				</td>
-				<td>
-					<button class="btn btn-danger" onclick="deleteProduct('.$item['id'].')">Xoá</button>
-				</td>
+			<a  href="addproduct.php?id=' . $item['id'] . '" class="btn btn-warning"> Sửa</a>
+			</td>
+			<td>
+			<button class="btn btn-danger" onclick="deleteProduct(' . $item['id'] . ')">Xóa</button>
+			</td>
 			</tr>';
-}
-                ?>
-                </tbody>
-                </table>
+						}
+						?>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-    <script type="text/javascript">
+	<script type="text/javascript">
 		function deleteProduct(id) {
 			var option = confirm('Bạn có chắc chắn muốn xoá san pham này không?')
-			if(!option) {
+			if (!option) {
 				return;
 			}
 			console.log(id)
@@ -97,5 +138,7 @@ require_once ('data/dbhelper.php');
 			})
 		}
 	</script>
+	<?= paginarion($number, $page, '&s=' . $s) ?>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <?php
 require_once('../data/dbhelper.php');
+require_once('../page.php');
 $id = '';
 if (isset($_GET['id'])) {
 	$id = $_GET['id'];
@@ -47,7 +48,12 @@ if (isset($_GET['id'])) {
 			<li class="nav-item">
 				<a class="nav-link active" href="../login.php">Đăng nhập</a>
 			</li>
+			<form class="form-inline mt-2 mt-md-0" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control mr-lg-5" id="s" name="s" placeholder="Tìm Kiếm!!" style="width:200px;">
+                    </div>
 		</ul>
+
 	</div>
 </nav>
 
@@ -62,18 +68,47 @@ if (isset($_GET['id'])) {
 				<div class="row">
 
 					<?php
+					$limit = 9;
+					$page = 1;
+					if (isset($_GET['page'])) {
+						$page = $_GET['page'];
+					}
+					if ($page <= 0) {
+						$page = 1;
+					}
+					$s = '';
+					$firstIndex = ($page - 1) * $limit;
+					if (isset($_POST['s'])) {
+						$s = $_POST['s'];
+						$s = str_replace('"', '\"', $s);
+					}
+					$additional = '';
+					if (!empty($s)) {
+						$additional = ' and title like "%' . $s . '%"';
+					}
+					$sql = 'select count(id) as total from product ';
+					$countResult = excuteSingleResult($sql);
+		
+					
+						$count = $countResult['total'];
+						$number = ceil($count / $limit);
+					
+					
+					$firstIndex = ($page - 1) * $limit;
+
 
 					$sql = 'select product.id, product.title, product.price, product.thumbnail,product.updated_at, 
 				category.name category_name 
-				from product left join category on product.id_category = category.id';
-					$Listproduct = excuteResult($sql);
-					$query = "SELECT * FROM sanpham";
+				from product left join category on product.id_category = category.id where 1 '. $additional . ' limit ' . $firstIndex . ', ' . $limit;
+				
+				$Listproduct = excuteResult($sql);
+					// $query = "SELECT * FROM sanpham";
 
 
 					foreach ($Listproduct as $item) {
 						echo ' 
 											
-						<div class="col-lg-4" style="margin-top: 30px;">
+						<div class="col-lg-4" style="margin-top: 30px;margin-bottom: 30px;">
 							<form method="post" id=' . $item['id'] . ' action="cart.php?action=addcart&id=' . $item['id'] . '">
 							<div > 
 								<a href="detail.php?id=' . $item['id'] . '"> <img src="' . $item['thumbnail'] . '" style="width:200px;height:210px,></a>
@@ -94,9 +129,9 @@ if (isset($_GET['id'])) {
 				</div>
 			</div>
 		</div>
-
+		
 </body>
-
+<?= paginarion($number, $page, '&s=' . $s) ?>
 <footer id="footer" class="footer">
 	<p> Hân Hạnh Phục Vụ Bạn</p>
 	<a class="top" href="index.html"></a>

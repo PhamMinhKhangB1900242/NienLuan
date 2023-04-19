@@ -50,6 +50,7 @@ require_once('../data/dbhelper.php');
 					<a class="nav-link active" href="../login.php">Đăng nhập</a>
 				</li>
 			</ul>
+			
 		</div>
 	</nav>
 
