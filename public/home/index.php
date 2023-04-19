@@ -1,6 +1,7 @@
 <?php
 
 require_once('../data/dbhelper.php');
+require_once('../page.php');
 ?>
 
 <!DOCTYPE html>
@@ -73,8 +74,31 @@ require_once('../data/dbhelper.php');
 					</thead>
 					<tbody>
 						<?php
-						$sql          = 'select * from category';
+						$limit = 10;
+						$page = 1;
+						if (isset($_GET['page'])) {
+							$page = $_GET['page'];
+						}
+						if ($page <= 0) {
+							$page = 1;
+						}
+						$s = '';
+						$firstIndex = ($page - 1) * $limit;
+						if (isset($_POST['s'])) {
+							$s = $_POST['s'];
+							$s = str_replace('"', '\"', $s);
+						}
+						$additional = '';
+						if (!empty($s)) {
+							$additional = ' and name like "%' . $s . '%"';
+						}
+						$sql = 'select * from category where 1 ' . $additional . ' limit ' . $firstIndex . ', ' . $limit;
+						
 						$categoryList = excuteResult($sql);
+						$sql = 'select count(id) as total from category ';
+						$countResult = excuteSingleResult($sql);
+						$count = $countResult['total'];
+						$number = ceil($count / $limit);
 						$index = 1;
 						foreach ($categoryList as $item) {
 							echo '<tr>
@@ -89,14 +113,14 @@ require_once('../data/dbhelper.php');
 			</div>
 		</div>
 	</div>
-
+	<?= paginarion($number, $page, '&s='.$s) ?>
 </body>
 <footer id="footer" class="footer">
 	<p> Hân Hạnh Phục Vụ Bạn</p>
 	<a class="top" href="index.html"></a>
 	<p>Liên hệ chúng tui qua
-		<a href="fb.com"><i class="fa fa-facebook-f"></i></a>
-		<a href="twitter.com"><i class="fa fa-twitter"></i></a> hoặc địa chỉ email <a href=""><i class="fas fa-mail-bulk"></i></a>
+		<a href="https://www.facebook.com/pham.minhkhang.121"><i class="fa fa-facebook-f"></i></a>
+		<a href="twitter.com"><i class="fa fa-twitter"></i></a> hoặc địa chỉ email <a href=""><i class="fas fa-mail-bulk"></i> khangro99@gmail.com</a>
 	</p>
 </footer>
 
