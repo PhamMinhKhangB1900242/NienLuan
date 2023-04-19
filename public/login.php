@@ -45,6 +45,27 @@ if ($error) {
 </head>
 </div>
 </nav>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+	  <a class="nav-link active" href="../home/home.php">Home</a>
+      </li>
+     <li class="nav-item">
+	 <a class="nav-link active" href="../home/index.php">Danh Mục</a>
+      </li>
+      <li class="nav-item">
+	  <a class="nav-link active" href="../home/cart.php">Giỏ Hàng</a>
+      </li>
+      <li class="nav-item">
+	  <a class="nav-link active" href="../home/thanhtoan_cart.php">Thanh Toán</a>
+      </li>
+      <li class="nav-item">
+	  <a class="nav-link active" href="../login.php">Đăng nhập</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <?php
 if ($loggedin) {
     echo '<p>You are now logged in!</p>';
