@@ -34,16 +34,19 @@ if (!empty($_POST)) {
             $sql = 'insert into orders(name,phone,address,total, created_at, updated_at) values ("' . $name . '","' . $phone . '", "' . $address . '", "' . $total . '","' . $created_at . '", "' . $updated_at . '")';
         }
         // execute($sql);
-        $id_orders = execute($sql,"insert");
+        $id_orders = execute($sql, "insert");
         // id	quantity	id_product	id_orders	created_at	updated_at
-            // $sql = 'insert into orders_detail( quantity,id_product,id_orders, created_at, updated_at) values ("' . $quantity . '","' . $id_product . '", "' . $id_orders . '","' . $created_at . '", "' . $updated_at . '")';
-            foreach($_SESSION['cart'] as $cartItem)
-            {
-                $quantity = $cartItem['quantity'];
-                $id_product = $cartItem['id'];
-                $sqlInsertOrderDetail = 'insert into orders_detail( quantity,id_product,id_orders, created_at, updated_at) values ("' . $quantity . '","' . $id_product . '", "' . $id_orders . '","' . $created_at . '", "' . $updated_at . '")';
-                execute($sqlInsertOrderDetail);
-            }
+        // $sql = 'insert into orders_detail( quantity,id_product,id_orders, created_at, updated_at) values ("' . $quantity . '","' . $id_product . '", "' . $id_orders . '","' . $created_at . '", "' . $updated_at . '")';
+        foreach ($_SESSION['cart'] as $cartItem) {
+            $quantity = $cartItem['quantity'];
+            $id_product = $cartItem['id'];
+            $sqlInsertOrderDetail = 'insert into orders_detail( quantity,id_product,id_orders, created_at, updated_at) values ("' . $quantity . '","' . $id_product . '", "' . $id_orders . '","' . $created_at . '", "' . $updated_at . '")';
+            execute($sqlInsertOrderDetail);
+        }
+
+        unset($_SESSION['cart']);
+
+
         header('Location: home.php');
         die();
     }
@@ -101,13 +104,8 @@ if (isset($_GET['id']) && isset($_POST['addcart'])) {
         $_SESSION['cart'][] = $session_array;
     }
 }
-if (isset($_GET['action'])) {
-    if ($_GET['action'] == 'clearall') {
-        unset($_SESSION['cart']);
-        echo '<script>window.location="home.php"</script>';
-    }
-  
-}
+
+
 
 ?>
 
@@ -199,14 +197,7 @@ if (isset($_GET['action'])) {
                                 }
                                 $ids = array_keys($_SESSION['cart']);
 
-                                // }
-                                if (isset($_GET['action'])) {
-                                    if ($_GET['action'] == 'clearall') {
-                                        unset($_SESSION['cart']);
-                                        echo '<script>window.location="home.php"</script>';
-                                    }
-                                   
-                                }
+                 
                             }
 
                             echo '
@@ -217,7 +208,7 @@ if (isset($_GET['action'])) {
                                 </li>
                               
                                 ';
-                               
+
                             ?>
                         </ul>
 
@@ -240,16 +231,16 @@ if (isset($_GET['action'])) {
                                     <label for="phone">Điện thoại</label>
                                     <input type="text" size="74" name="phone" id="phone" value="">
                                 </div>
-                                    <input hidden type="text" size="74" name="total" id="total" value=<?php echo $total ?>>
+                                <input hidden type="text" size="74" name="total" id="total" value=<?php echo $total ?>>
                             </form>
                         </div>
                         <hr class="mb-4">
                         <div>
-
-                        <a href="thanhtoan_cart.php?action=clearall">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" name="dathang">Đặt hàng</button> 
-                    </a>
-                        
+                            
+                                <a href="thanhtoan_cart.php?action=clearall">
+                                    <button class="btn btn-primary btn-lg btn-block" type="clearall" name="clearall" onclick="dathang()">Đặt hàng</button>
+                                </a>
+                            
                         </div>
 
                     </div>
@@ -259,22 +250,28 @@ if (isset($_GET['action'])) {
         </div>
 
     </main>
-    
+
 </body>
-<?php
-if (isset($_GET['action'])) {
-    if ($_GET['action'] == 'clearall') {
-        unset($_SESSION['cart']);
-        echo '<script>window.location="home.php"</script>';
+<script type="text/javascript">
+    function dathang() {
+        alert("đặt hàng thành công");
+        window.location="home.php"
     }
-   
-}
+</script>
+<?php 
+// if (isset($_GET['action'])) {
+//     if ($_GET['action'] == 'clearall') {
+//         unset($_SESSION['cart']);
+//         echo '<script>window.location="home.php"</script>';
+//     }
+// }
+
 ?>
 <footer id="footer" class="footer">
-	<p> Hân Hạnh Phục Vụ Bạn</p>
-	<a class="top" href="index.html"></a>
-	<p>Liên hệ chúng tui qua
-		<a href="https://www.facebook.com/pham.minhkhang.121"><i class="fa fa-facebook-f"></i></a>
-		<a href="twitter.com"><i class="fa fa-twitter"></i></a> hoặc địa chỉ email <a href=""><i class="fas fa-mail-bulk"></i> khangro99@gmail.com</a>
-	</p>
+    <p> Hân Hạnh Phục Vụ Bạn</p>
+    <a class="top" href="index.html"></a>
+    <p>Liên hệ chúng tui qua
+        <a href="https://www.facebook.com/pham.minhkhang.121"><i class="fa fa-facebook-f"></i></a>
+        <a href="twitter.com"><i class="fa fa-twitter"></i></a> hoặc địa chỉ email <a href=""><i class="fas fa-mail-bulk"></i> khangro99@gmail.com</a>
+    </p>
 </footer>

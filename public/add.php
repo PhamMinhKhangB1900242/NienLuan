@@ -55,12 +55,18 @@ if (isset($_GET['id'])) {
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link " href="index.php">Quản Lý Danh Mục</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="indexproduct.php">Quản Lý Sản Phẩm</a>
-  </li>
+	<li class="nav-item">
+		<a class="nav-link" href="index.php">Quản Lý Danh Mục</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="indexproduct.php">Quản Lý Sản Phẩm</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="indexorders.php">Quản Lý Đơn Hàng</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="logout.php">Đăng Xuất</a>
+	</li>
 </ul>
 <body>
 	<div class="container">

@@ -117,7 +117,7 @@ if (isset($_GET['id'])) {
 								<a href="detail.php?id=' . $item['id'] . ' " > <p>' . $item['title'] . '</p></a>
                 				<p style= "color: red; font-weight: bold;">' . number_format($item['price'], 0, ",", ".") . 'Đ</p>
 								<input type="submit" name="addcart"  class="u-full-width button-primary button" value="Thêm vào giỏ hàng"></input>
-								<a href="thanhtoan.php?id=' . $item['id'] . '" class="u-full-width button-primary button input add-to-sell">Mua ngay</a>
+								
 								</div>
 								</form>
                 		 </div>
@@ -130,7 +130,7 @@ if (isset($_GET['id'])) {
 				</div>
 			</div>
 		</div>
-		
+		<!-- <a href="thanhtoan.php?id=' . $item['id'] . '" class="u-full-width button-primary button input add-to-sell">Mua ngay</a> -->
 </body>
 <?= paginarion($number, $page, '&s=' . $s) ?>
 <footer id="footer" class="footer">

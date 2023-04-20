@@ -95,11 +95,7 @@ require_once('page.php');
 						$count = $countResult['total'];
 						$number = ceil($count / $limit);
 						$firstIndex = ($page - 1) * $limit;
-						// SELECT orders.name, orders.address, orders.phone, orders_detail.*, product.title as product_name 
-						// FROM orders
-						// INNER JOIN orders_detail ON orders.id = orders_detail.id_orders
-						// INNER JOIN product ON product.id = orders_detail.id_product
-						// WHERE orders.id = 16
+						
 
 						$sql  = 'select product.id, product.title, product.price, product.thumbnail,product.updated_at, 
                 category.name category_name 

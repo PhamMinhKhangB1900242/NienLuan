@@ -58,7 +58,7 @@ updated_at				 -->
 							<th width="50px">STT</th>
 							<th>Name</th>
 							<th>Phone</th>
-							<th>Address</th>
+							<th width="300px">Address</th>
 							<th>total</th>
 							<th>Ngay Cap Nhat</th>
 							<th width="50px"></th>

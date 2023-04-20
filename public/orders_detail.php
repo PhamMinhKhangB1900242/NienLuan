@@ -8,7 +8,7 @@ require_once('page.php');
 
 <head>
 	<meta charset="UTF-8">
-	<title>Quản Lý San Pham</title>
+	<title>Chi Tiết Đơn Hàng</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -39,7 +39,7 @@ require_once('page.php');
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center">Quản Lý San Pham</h2>
+				<h2 class="text-center">Chi Tiết Đơn Hàng</h2>
 			</div>
 			<div class="panel-body">
 				
@@ -99,7 +99,7 @@ require_once('page.php');
 				<td>' . (++$firstIndex) . '</td>
 				<td><img src="' . $item['product_thumbnail'] . '"
                 style="max-width: 100px"/></td>
-                <td>' . $item['product_name'] . '</td>
+                <td >' . $item['product_name'] . '</td>
                 <td>' . $item['product_price'] . '</td>
                
 				
