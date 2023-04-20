@@ -105,7 +105,7 @@ updated_at				 -->
                 <td>' . $item['total'] . '</td>
                 <td>' . $item['updated_at'] . '</td>
                 <td>
-                <button class="btn btn-success" >Duyệt</button>
+                <button class="btn btn-success">Duyệt</button>
                 </td>
                 <td>
                 

@@ -90,7 +90,7 @@ require_once('page.php');
                         from orders 
                         inner join orders_detail on orders.id = orders_detail.id_orders 
                         inner join product on product.id = orders_detail.id_product
-                        where 1' . $additional . ' limit ' . $firstIndex . ', ' . $limit;
+                        where orders.id='. $_GET['id'] . $additional . ' limit ' . $firstIndex . ', ' . $limit;
                         
 						$orders_detailList = excuteResult($sql);
 
