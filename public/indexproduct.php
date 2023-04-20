@@ -61,11 +61,11 @@ require_once('page.php');
 					<thead>
 						<tr>
 							<th width="50px">STT</th>
-							<th>Hinh Anh</th>
-							<th>Tên San Pham</th>
-							<th>Gia Ban</th>
-							<th>Danh Muc</th>
-							<th>Ngay Cap Nhat</th>
+							<th>Hinh Ảnh</th>
+							<th>Tên Sản Phẩm</th>
+							<th>Giá Bán</th>
+							<th>Danh Mục</th>
+							<th>Ngày Cập Nhật</th>
 							<th width="50px"></th>
 							<th width="50px"></th>
 						</tr>

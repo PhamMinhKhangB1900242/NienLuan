@@ -58,9 +58,6 @@ if ($error) {
 	  <a class="nav-link active" href="../home/cart.php">Giỏ Hàng</a>
       </li>
       <li class="nav-item">
-	  <a class="nav-link active" href="../home/thanhtoan_cart.php">Thanh Toán</a>
-      </li>
-      <li class="nav-item">
 	  <a class="nav-link active" href="../login.php">Đăng nhập</a>
       </li>
     </ul>

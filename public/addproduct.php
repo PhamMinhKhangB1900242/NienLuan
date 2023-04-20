@@ -95,19 +95,19 @@ if (isset($_GET['id'])) {
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center">Thêm/Sửa San Pham</h2>
+				<h2 class="text-center">Thêm/Sửa Sản Phẩmm</h2>
 			</div>
 			<div class="panel-body">
 				<form method="post">
 					<div class="form-group">
-						<label for="title">Tên Danh Mục:</label>
+						<label for="title">Tên Sản Phẩm:</label>
 						<input type="text" name="id" value="<?= $id ?>" hidden="true">
 						<input required="true" type="text" class="form-control" id="title" name="title" value="<?= $title ?>">
 					</div>
 					<div class="form-group">
-						<label for="price">Chon Danh Muc</label>
+						<label for="price">Chọn Danh Mục</label>
 						<select class="form-control" id="id_category" name="id_category" value="<?= $id_category ?>">
-							<option>--Lua Chon Danh Muc--</option>
+							<option>--Lựa Chọn Danh Mục--</option>
 							<?php
 							$sql = 'select * from category';
 							$categoryList = excuteResult($sql);
@@ -122,7 +122,7 @@ if (isset($_GET['id'])) {
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="price">Gia Ban</label>
+						<label for="price">Giá Bán</label>
 						<input required="true" type="number" class="form-control" id="price" name="price" value="<?= $price ?>">
 					</div>
 					<label for="thumbnail">thumbnail</label>

@@ -48,9 +48,9 @@ require_once('page.php');
 					<thead>
 						<tr>
 							<th width="50px">STT</th>
-							<th>Hinh Anh</th>
-							<th>Tên San Pham</th>
-							<th>Gia Ban</th>
+							<th>Hình Ảnh</th>
+							<th>Tên Sản Phẩm</th>
+							<th>Giá Bán</th>
 						
 							
 						</tr>
@@ -113,7 +113,7 @@ require_once('page.php');
 		</div>
 	</div>
 	
-	<?= paginarion($number, $page, '&s=' . $s) ?>
+	
 </body>
 
 </html>

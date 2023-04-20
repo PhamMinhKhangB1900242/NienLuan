@@ -23,7 +23,7 @@ session_start();
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
         <div class="container-fluid">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -34,9 +34,6 @@ session_start();
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="../home/cart.php">Giỏ Hàng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="thanhtoan_cart.php">Thanh Toán</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="../login.php">Đăng nhập</a>

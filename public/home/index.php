@@ -32,28 +32,24 @@ require_once('../page.php');
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
-		<div class="container-fluid">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link active" href="home.php">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="index.php">Danh Mục</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="../home/cart.php">Giỏ Hàng</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="thanhtoan_cart.php">Thanh Toán</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" href="../login.php">Đăng nhập</a>
-				</li>
-			</ul>
-			
-		</div>
-	</nav>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="home.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.php">Danh Mục</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../home/cart.php">Giỏ Hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="../login.php">Đăng nhập</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 
 	</section>
