@@ -70,11 +70,14 @@ if (isset($_GET['id'])) {
 
           foreach ($productList as $item) {
             echo ' <div class="col-lg-4">
+            <form method="post" id=' . $item['id'] . ' action="cart.php?action=addcart&id=' . $item['id'] . '">
                <a href="detail.php?id=' . $item['id'] . '"> <img src="' . $item['thumbnail'] . '" style= "width: 100%"></a>
                <a href="detail.php?id=' . $item['id'] . '"> <p>' . $item['title'] . '</p></a>
                 <p style= "color: red; font-weight: bold;">' . $item['price'] . '</p>
-                
-                </div>';
+                <input type="submit" name="addcart"  class="u-full-width button-primary button" value="Thêm vào giỏ hàng"></input>
+                </div>
+                </form>
+                ';
           }
           ?>
 
